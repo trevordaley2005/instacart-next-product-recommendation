@@ -6,53 +6,54 @@ model yükleme-veri hazırlama- ve tahminleme mekanizmasıdır
 """
 
 
-from typing import Dict, List, Tuple
-
-import joblib
 import numpy as np
+import joblib
+import sys
+from pathlib import Path
 
-from .config import MODEL_PATH, load_feature_list, load_threshold
+try:
+    from src import config
+except ImportError:
+    import config
 
+class InstacartPredictor:
+    def __init__(self):
+        self.model = None
+        self.threshold = 0.40
+        self.feature_names = []
+        self._load_assets()
 
-class ReorderModel:
-    
-    def __init__(self) -> None:
-        """
-        config.py dosyasına tanımladığım  yolları kullanarak: 
-        lgb_model_final.pkl + feature_names.json + best_threshold.txt yüklemeyi yapıyoruz.
-        """
-        self.model = joblib.load(MODEL_PATH)
-        self.feature_list: List[str] = load_feature_list()
-        self.threshold: float = load_threshold()
+    def _load_assets(self):
+        if config.MODEL_PATH.exists():
+            self.model = joblib.load(config.MODEL_PATH)
+        self.threshold = config.load_threshold()
+        self.feature_names = config.load_feature_names()
 
-    def _to_array(self, features: Dict[str, float]) -> np.ndarray:
-        """
-        modelin isteyeceği şekilde numpy vektörüne dönüştürüp
-        eksik featureler varsa 0.0 değerini hata çıkmaması için ekliyoruz.
-        """
-        values = [float(features.get(col, 0.0)) for col in self.feature_list]
-        return np.array([values], dtype=float)
+    def predict(self, features):
+        if self.model is None:
+            return {"error": "Model not found"}
 
-    def predict_proba(self, features: Dict[str, float]) -> float:
-        x = self._to_array(features)
-        if hasattr(self.model, "predict_proba"):
-            proba = self.model.predict_proba(x)[0, 1]
-        else:
-            proba = self.model.predict(x)[0]
-        return float(proba)
+        cols_to_use = self.feature_names if self.feature_names else list(features.keys())
+        
+        input_vector = []
+        for col in cols_to_use:
+            val = features.get(col, 0.0)
+            input_vector.append(val)
+        
+        X_input = np.array(input_vector).reshape(1, -1)
+        
+        try:
+            if hasattr(self.model, "predict_proba"):
+                probability = self.model.predict_proba(X_input)[0][1]
+            else:
+                probability = self.model.predict(X_input)[0]
+        except Exception as e:
+            return {"error": str(e)}
 
-
-    def predict_label(self, proba: float) -> int: 
-        return int(proba >= self.threshold)
-
-    def predict(self, features: Dict[str, float]) -> Tuple[float, int]:
-        """
-        deploy kısmında asıl çağıracağım fonksiyon
-        """
-        proba = self.predict_proba(features)
-        label = self.predict_label(proba)
-        return proba, label
-
-
-
-reorder_model = ReorderModel()
+        is_reorder = 1 if probability >= self.threshold else 0
+        
+        return {
+            "probability": float(probability),
+            "is_reorder": is_reorder,
+            "threshold": self.threshold
+        }
