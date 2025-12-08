@@ -46,3 +46,4 @@ logs/
 
 
 monitoring/predictions.db
+models/lgb_model_final.pkl
